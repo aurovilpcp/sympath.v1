@@ -3,16 +3,11 @@ import { Link } from 'react-router-dom';
 import { ArrowRight, Star, Users, TrendingUp, Shield, Zap, Globe, Mic, Headphones, Music, Clock, Award, CheckCircle, Search, MapPin, ChevronDown, ChevronUp } from 'lucide-react';
 
 const LandingPage: React.FC = () => {
-  const [selectedLocation, setSelectedLocation] = useState('Mumbai');
   const [searchTerm, setSearchTerm] = useState('');
   const [studioWorkflowExpanded, setStudioWorkflowExpanded] = useState(false);
   const [postProductionWorkflowExpanded, setPostProductionWorkflowExpanded] = useState(false);
   const [postProductionInfoExpanded, setPostProductionInfoExpanded] = useState(false);
   const [expandedFeature, setExpandedFeature] = useState<number | null>(null);
-
-  const locations = [
-    'Mumbai', 'Delhi', 'Bangalore', 'Chennai', 'Pune', 'Hyderabad', 'Kolkata', 'Ahmedabad'
-  ];
 
   const features = [
     {
@@ -94,14 +89,36 @@ const LandingPage: React.FC = () => {
   return (
     <div className="overflow-hidden">
       {/* Hero Section - Mobile Dark Design */}
-      <section className="relative bg-gray-50 md:bg-gray-50 py-8 sm:py-12 lg:py-32">
+      <section className="relative bg-gray-50 py-8 sm:py-12 lg:py-32">
         {/* Mobile Dark Background */}
         <div className="absolute inset-0 bg-gradient-to-br from-gray-800 to-gray-900 md:hidden"></div>
         
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center">
+            {/* Unified Search Bar - Top Position */}
+            <div className="max-w-2xl mx-auto mb-6 sm:mb-8 px-2">
+              <div className="bg-white rounded-lg p-3 sm:p-4 shadow-sm border border-gray-200">
+                <div className="relative">
+                  <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-4 h-4 sm:w-5 sm:h-5" />
+                  <input
+                    type="text"
+                    placeholder="Search studios, locations..."
+                    value={searchTerm}
+                    onChange={(e) => setSearchTerm(e.target.value)}
+                    className="w-full pl-8 sm:pl-10 pr-20 sm:pr-24 py-2 sm:py-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-gray-500 focus:border-transparent text-sm sm:text-base"
+                  />
+                  <Link
+                    to="/studios"
+                    className="absolute right-2 top-1/2 transform -translate-y-1/2 bg-gray-900 text-white px-3 sm:px-4 py-1.5 sm:py-2 rounded-md text-xs sm:text-sm font-medium hover:bg-gray-800 transition-colors"
+                  >
+                    Search Studios
+                  </Link>
+                </div>
+              </div>
+            </div>
+
             <div className="mb-4 sm:mb-6 lg:mb-8">
-              <span className="inline-block px-3 sm:px-4 py-1.5 sm:py-2 bg-gray-100 md:bg-gray-100 bg-opacity-20 md:bg-opacity-100 text-white md:text-gray-700 rounded-full text-xs sm:text-sm font-medium mb-3 sm:mb-4 lg:mb-6">
+              <span className="inline-block px-3 sm:px-4 py-1.5 sm:py-2 bg-white bg-opacity-20 md:bg-gray-100 text-white md:text-gray-700 rounded-full text-xs sm:text-sm font-medium mb-3 sm:mb-4 lg:mb-6">
                 India's first of its kind platform
               </span>
             </div>
@@ -123,116 +140,6 @@ const LandingPage: React.FC = () => {
                 <span className="w-1.5 h-1.5 sm:w-2 sm:h-2 bg-gray-300 md:bg-gray-400 rounded-full"></span>
                 <span>Perfect</span>
               </div>
-            </div>
-
-            {/* Mobile Search Section - White background on mobile */}
-            <div className="max-w-4xl mx-auto mb-4 sm:mb-6 lg:mb-8 px-2 sm:px-4 md:hidden">
-              <div className="bg-white rounded-lg p-3 sm:p-4 shadow-sm border border-gray-200">
-                <div className="space-y-3">
-                  {/* Location Selector */}
-                  <div>
-                    <label className="block text-xs font-medium text-gray-700 mb-1">
-                      Location
-                    </label>
-                    <div className="relative">
-                      <MapPin className="absolute left-2 top-1/2 transform -translate-y-1/2 text-gray-400 w-4 h-4" />
-                      <select
-                        value={selectedLocation}
-                        onChange={(e) => setSelectedLocation(e.target.value)}
-                        className="w-full pl-8 pr-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-gray-500 focus:border-transparent text-sm"
-                      >
-                        {locations.map((location) => (
-                          <option key={location} value={location}>
-                            {location}
-                          </option>
-                        ))}
-                      </select>
-                    </div>
-                  </div>
-
-                  {/* Search Bar */}
-                  <div>
-                    <label className="block text-xs font-medium text-gray-700 mb-1">
-                      Search
-                    </label>
-                    <div className="relative">
-                      <Search className="absolute left-2 top-1/2 transform -translate-y-1/2 text-gray-400 w-4 h-4" />
-                      <input
-                        type="text"
-                        placeholder="Studios, engineers..."
-                        value={searchTerm}
-                        onChange={(e) => setSearchTerm(e.target.value)}
-                        className="w-full pl-8 pr-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-gray-500 focus:border-transparent text-sm"
-                      />
-                    </div>
-                  </div>
-
-                  {/* Search Button */}
-                  <Link
-                    to="/studios"
-                    className="w-full bg-gray-900 text-white py-2.5 rounded-md text-sm font-semibold hover:bg-gray-800 transition-all duration-200 flex items-center justify-center"
-                  >
-                    Search Studios
-                    <ArrowRight className="ml-2 w-4 h-4" />
-                  </Link>
-                </div>
-              </div>
-            </div>
-
-            {/* Desktop Search and Location Section */}
-            <div className="max-w-4xl mx-auto mb-6 sm:mb-8 px-4 hidden md:block">
-              <div className="bg-white rounded-lg p-4 sm:p-6 shadow-sm border border-gray-200">
-                <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
-                  {/* Location Selector */}
-                  <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-2">
-                      Select Your Location
-                    </label>
-                    <div className="relative">
-                      <MapPin className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5" />
-                      <select
-                        value={selectedLocation}
-                        onChange={(e) => setSelectedLocation(e.target.value)}
-                        className="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-gray-500 focus:border-transparent text-sm sm:text-base"
-                      >
-                        {locations.map((location) => (
-                          <option key={location} value={location}>
-                            {location}
-                          </option>
-                        ))}
-                      </select>
-                    </div>
-                  </div>
-
-                  {/* Search Bar */}
-                  <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-2">
-                      Search Studios & Services
-                    </label>
-                    <div className="relative">
-                      <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5" />
-                      <input
-                        type="text"
-                        placeholder="Search studios, engineers, services..."
-                        value={searchTerm}
-                        onChange={(e) => setSearchTerm(e.target.value)}
-                        className="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-gray-500 focus:border-transparent text-sm sm:text-base"
-                      />
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            {/* Desktop Search Studios Button */}
-            <div className="mb-6 sm:mb-8 px-4 hidden md:block">
-              <Link
-                to="/studios"
-                className="bg-gray-900 text-white px-6 sm:px-8 py-3 sm:py-4 rounded-md text-base sm:text-lg font-semibold hover:bg-gray-800 transition-all duration-200 inline-flex items-center"
-              >
-                Search Studios
-                <ArrowRight className="ml-2 w-4 h-4 sm:w-5 sm:h-5" />
-              </Link>
             </div>
             
             {/* Main CTA Buttons - Stacked on mobile, side by side on desktop */}
@@ -264,18 +171,18 @@ const LandingPage: React.FC = () => {
               </Link>
             </div>
 
-            {/* Informational Badges - White on mobile, original on desktop */}
-            <div className="grid grid-cols-1 sm:grid-cols-3 gap-2 sm:gap-3 lg:gap-4 justify-center mb-6 sm:mb-8 lg:mb-12 px-4 max-w-2xl sm:max-w-4xl mx-auto">
-              <span className="inline-flex items-center px-3 sm:px-4 py-2 bg-white bg-opacity-20 md:bg-white md:bg-opacity-100 rounded-full text-xs sm:text-sm font-medium text-white md:text-gray-700 border border-white border-opacity-30 md:border-gray-200 shadow-sm">
-                <CheckCircle className="w-3 h-3 sm:w-4 sm:h-4 mr-2 text-green-400 md:text-green-600 flex-shrink-0" />
+            {/* Informational Badges - 3 columns on mobile, white on mobile */}
+            <div className="grid grid-cols-3 gap-2 sm:gap-3 lg:gap-4 justify-center mb-6 sm:mb-8 lg:mb-12 px-4 max-w-2xl sm:max-w-4xl mx-auto">
+              <span className="inline-flex items-center px-2 sm:px-3 md:px-4 py-2 bg-white bg-opacity-20 md:bg-white md:bg-opacity-100 rounded-full text-xs sm:text-sm font-medium text-white md:text-gray-700 border border-white border-opacity-30 md:border-gray-200 shadow-sm">
+                <CheckCircle className="w-3 h-3 sm:w-4 sm:h-4 mr-1 sm:mr-2 text-green-400 md:text-green-600 flex-shrink-0" />
                 <span className="truncate">Verified studios</span>
               </span>
-              <span className="inline-flex items-center px-3 sm:px-4 py-2 bg-white bg-opacity-20 md:bg-white md:bg-opacity-100 rounded-full text-xs sm:text-sm font-medium text-white md:text-gray-700 border border-white border-opacity-30 md:border-gray-200 shadow-sm">
-                <CheckCircle className="w-3 h-3 sm:w-4 sm:h-4 mr-2 text-green-400 md:text-green-600 flex-shrink-0" />
+              <span className="inline-flex items-center px-2 sm:px-3 md:px-4 py-2 bg-white bg-opacity-20 md:bg-white md:bg-opacity-100 rounded-full text-xs sm:text-sm font-medium text-white md:text-gray-700 border border-white border-opacity-30 md:border-gray-200 shadow-sm">
+                <CheckCircle className="w-3 h-3 sm:w-4 sm:h-4 mr-1 sm:mr-2 text-green-400 md:text-green-600 flex-shrink-0" />
                 <span className="truncate">Expert engineers</span>
               </span>
-              <span className="inline-flex items-center px-3 sm:px-4 py-2 bg-white bg-opacity-20 md:bg-white md:bg-opacity-100 rounded-full text-xs sm:text-sm font-medium text-white md:text-gray-700 border border-white border-opacity-30 md:border-gray-200 shadow-sm">
-                <CheckCircle className="w-3 h-3 sm:w-4 sm:h-4 mr-2 text-green-400 md:text-green-600 flex-shrink-0" />
+              <span className="inline-flex items-center px-2 sm:px-3 md:px-4 py-2 bg-white bg-opacity-20 md:bg-white md:bg-opacity-100 rounded-full text-xs sm:text-sm font-medium text-white md:text-gray-700 border border-white border-opacity-30 md:border-gray-200 shadow-sm">
+                <CheckCircle className="w-3 h-3 sm:w-4 sm:h-4 mr-1 sm:mr-2 text-green-400 md:text-green-600 flex-shrink-0" />
                 <span className="truncate">Global quality</span>
               </span>
             </div>
