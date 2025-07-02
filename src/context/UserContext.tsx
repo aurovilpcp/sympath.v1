@@ -55,8 +55,8 @@ export const UserProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
   const [user, setUser] = useState<User | null>({
     id: '1',
     uid: '1234AB',
-    name: 'Alex Rivera',
-    email: 'alex@example.com',
+    name: 'Gita Lipika',
+    email: 'lipika@patanhi.com',
     mobile: '+91 98765 43210',
     address: 'Mumbai, Maharashtra',
     categories: ['Singer', 'Music Producer'],
