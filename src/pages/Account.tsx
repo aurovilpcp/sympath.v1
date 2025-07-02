@@ -86,8 +86,8 @@ const Account: React.FC = () => {
         setUser({
           id: '1',
           uid: '1234AB',
-          name: 'Alex Rivera',
-          email: 'alex@example.com',
+          name: 'Gita Lipika',
+          email: 'lipika@patanhi.com',
           mobile: '+91 98765 43210',
           address: 'Mumbai, Maharashtra',
           categories: ['Singer', 'Music Producer'],
@@ -143,8 +143,8 @@ const Account: React.FC = () => {
   const handleGoogleAuth = useCallback(() => {
     // Mock Google authentication - create user with Google data
     const googleUser = createUserProfile({
-      name: 'Alex Rivera',
-      email: 'alex@gmail.com',
+      name: 'Gita Lipika',
+      email: 'lipika@patanhi.com',
       mobile: '', // Will need to be filled later
       address: '', // Will need to be filled later
       categories: [], // Will need to be filled later
